@@ -13,7 +13,7 @@ When User Add an item to cart
 Then Items must be added to cart
 
 Scenario: Delete an items in cart
-Given User is on Cart Page
+#Given User is on Cart Page
 When List of items should be available in cart
 Then Delete an item from cart
 

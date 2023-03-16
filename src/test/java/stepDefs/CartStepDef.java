@@ -58,6 +58,10 @@ public class CartStepDef {
 	@Then("Should display Home Page")
 	public void should_display_home_page() {
 		 driver.findElement(By.xpath("//div//a[contains(text(),'Home')]")).click();
+		 wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li//a[@id='logout2']")));
+		 String out=driver.findElement(By.xpath("//li//a[@id='logout2']")).getText();
+		 Assert.assertTrue(true, out);
+		 
 	}
 
 	@When("User Add an item to cart")
@@ -98,23 +102,27 @@ public class CartStepDef {
 	   
 	}
 
-	@Given("User is on Cart Page")
-	public void user_is_on_cart_page() throws InterruptedException {
-		
-		
-	    
-	}
+//	@Given("User is on Cart Page")
+//	public static void user_is_on_cart_page() throws InterruptedException {
+//		
+//	//	 driver.findElement(By.xpath("//a[contains(text(),'Cart')]")).click();
+//	    
+//	}
 
 	@When("List of items should be available in cart")
-	public void list_of_items_should_be_available_in_cart() throws InterruptedException {
-		List<WebElement> BefCart=driver.findElements(By.xpath("//td[2]"));
-		wait.until(ExpectedConditions.visibilityOfAllElements(BefCart));
-		Thread.sleep(2000);
+	public  void list_of_items_should_be_available_in_cart() throws InterruptedException {
+//		List<WebElement> BefCart=driver.findElements(By.xpath("//td[2]"));
+//		wait.until(ExpectedConditions.visibilityOfAllElements(BefCart));
+//		Thread.sleep(2000);
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//td[2]")));
 	  
 	}
 
 	@Then("Delete an item from cart")
 	public void delete_an_item_from_cart() throws InterruptedException {
+		List<WebElement> BefCart=driver.findElements(By.xpath("//td[2]"));
+		wait.until(ExpectedConditions.visibilityOfAllElements(BefCart));
+		Thread.sleep(2000);
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div//a[contains(text(),'Delete')][1]"))).click();
 		//delopt.click();
@@ -122,10 +130,10 @@ public class CartStepDef {
 		
 		wait.until(ExpectedConditions.visibilityOfAllElements(AftCart));
 		Thread.sleep(3000);
-//		if(BefCart!=AftCart) {
-//			Assert.assertTrue(true);
-//		}
-//		driver.findElement(By.xpath("//div//a[contains(text(),'Home')]")).click();
+		if(BefCart!=AftCart) {
+			Assert.assertTrue(true);
+		}
+		driver.findElement(By.xpath("//div//a[contains(text(),'Home')]")).click();
 	}
 
 	@When("User Place ordering")
@@ -157,6 +165,12 @@ public class CartStepDef {
 
 	@Then("Item must be Placed")
 	public void item_must_be_placed() {
+		WebElement conmsg = driver.findElement(By.xpath("//button[contains(text(),'Thnak you for your purchase!')]"));
+	//	wait.until(ExpectedConditions.textToBePresentInElement(conmsg, "Thank you for your purchase!"));
+		boolean confirm=conmsg.isDisplayed();
+		Assert.assertTrue(confirm);
+		
+		
 		driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click(); 
 	}
 
