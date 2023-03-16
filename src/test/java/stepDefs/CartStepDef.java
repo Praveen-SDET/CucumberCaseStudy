@@ -133,7 +133,7 @@ public class CartStepDef {
 		if(BefCart!=AftCart) {
 			Assert.assertTrue(true);
 		}
-		driver.findElement(By.xpath("//div//a[contains(text(),'Home')]")).click();
+	//	driver.findElement(By.xpath("//div//a[contains(text(),'Home')]")).click();
 	}
 
 	@When("User Place ordering")
