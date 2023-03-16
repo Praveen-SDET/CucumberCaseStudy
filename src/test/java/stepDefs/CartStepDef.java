@@ -165,7 +165,8 @@ public class CartStepDef {
 
 	@Then("Item must be Placed")
 	public void item_must_be_placed() {
-		WebElement conmsg = driver.findElement(By.xpath("//button[contains(text(),'Thnak you for your purchase!')]"));
+		WebElement conmsg = driver.findElement(By.xpath("(//h2)[3]"));
+	//	wait.until(ExpectedConditions.presenceOfElementLocated("//button[contains(text(),'Thank you for your purchase!')]"))
 	//	wait.until(ExpectedConditions.textToBePresentInElement(conmsg, "Thank you for your purchase!"));
 		boolean confirm=conmsg.isDisplayed();
 		Assert.assertTrue(confirm);
