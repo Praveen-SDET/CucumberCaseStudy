@@ -52,15 +52,26 @@ public class CartStepDef {
 	   driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
 	   Thread.sleep(3000);
 	   wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div//button[@onclick='logIn()']"))).click();
-	   Thread.sleep(3000);
+	   Thread.sleep(5000);
 	}
 
 	@Then("Should display Home Page")
 	public void should_display_home_page() {
-		 driver.findElement(By.xpath("//div//a[contains(text(),'Home')]")).click();
-		 wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li//a[@id='logout2']")));
-		 String out=driver.findElement(By.xpath("//li//a[@id='logout2']")).getText();
-		 Assert.assertTrue(true, out);
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(50));
+//		 wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li//a[@id='logout2']")));
+//		 WebElement logoutmsg = driver.findElement(By.xpath("//li//a[@id='logout2']"));
+		 
+		 
+		 wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li//a[contains(text(),'Welcome')]")));
+		 String logoutmsg = driver.findElement(By.xpath("//li//a[contains(text(),'Welcome')]")).getText();
+		 
+		 boolean success=logoutmsg.equalsIgnoreCase("Welcome Naan");
+			Assert.assertTrue(success);
+			
+			 driver.findElement(By.xpath("//div//a[contains(text(),'Home')]")).click();
+		
+//		 String out=driver.findElement(By.xpath("//li//a[@id='logout2']")).getText();
+//		 Assert.assertTrue(true, out);
 		 
 	}
 
